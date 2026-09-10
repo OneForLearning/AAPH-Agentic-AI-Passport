@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "allowed_actions": ["LIST_DIRECTORY", "READ_FILE", "COMPUTE_SHA256", "WRITE_REPORT"],
+  "resource_prefixes": ["inbox/", "output/"],
+  "purposes": ["analysis"]
+}

@@ -1,0 +1,16 @@
+{
+  "private_seed": "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE",
+  "proposal": {
+    "request_id": "interop-request",
+    "session_id": "interop-session",
+    "action": "READ_FILE",
+    "resource": "inbox/report.txt",
+    "size_bytes": 4,
+    "purpose": "analysis",
+    "destination": null
+  },
+  "canonical_json": "{\"action\":\"READ_FILE\",\"destination\":null,\"purpose\":\"analysis\",\"request_id\":\"interop-request\",\"resource\":\"inbox/report.txt\",\"session_id\":\"interop-session\",\"size_bytes\":4}",
+  "digest_sha384": "0aT0UmrbFgeT2i1bCezzw_jMhxpcG-e9IOhfNBII3XGZjDknQ1a7kdsg_l15PS1w",
+  "public_key": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w",
+  "signature": "VdBJwanwxYjKk_lEwDBe1OmLJuCjsGSlMgCe0-A0zE9K2cwQdTIKFpSGZGFAVzCcqE8PiM_qslUjhNWamNUsDw"
+}

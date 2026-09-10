@@ -1,0 +1,66 @@
+name: aaph-poc
+x-hardening: &hardening
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs:
+    - "/tmp:rw,noexec,nosuid,size=16m"
+services:
+  server:
+    <<: *hardening
+    build: {context: ., dockerfile: Dockerfile.server}
+    environment:
+      AAPH_PUBLIC_LISTEN_ADDR: 0.0.0.0:3000
+      AAPH_ADMIN_LISTEN_ADDR: 0.0.0.0:3002
+      AAPH_AUTHORITY_DATABASE_URL: sqlite:///data/authority/authority.db
+      AAPH_PEP_DATABASE_URL: sqlite:///data/pep/pep.db
+      AAPH_PEP_WORKSPACE: /data/workspace
+      AAPH_CONFIG_DIR: /run/config
+      AAPH_AUTHORITY_SIGNING_KEY_FILE: /run/keys/authority/signing.key
+      AAPH_AGENT_PUBLIC_KEY_FILE: /run/keys/agent/public.key
+      AAPH_ADMIN_SECRET: NON_PRODUCTION_DEMO_ADMIN
+      AAPH_PUBLIC_TLS_CERT: /run/certs/aaph-server.crt
+      AAPH_PUBLIC_TLS_KEY: /run/certs/aaph-server.key
+      AAPH_ADMIN_TLS_CERT: /run/certs/aaph-server.crt
+      AAPH_ADMIN_TLS_KEY: /run/certs/aaph-server.key
+      RUST_LOG: info
+    ports: ["127.0.0.1:3000:3000", "127.0.0.1:3002:3002"]
+    volumes:
+      - authority-db:/data/authority:rw
+      - pep-db:/data/pep:rw
+      - ./demo/workspace/inbox:/data/workspace/inbox:ro
+      - ./demo-data/output:/data/workspace/output:rw
+      - ./local-keys/authority/signing.key:/run/keys/authority/signing.key:ro
+      - ./local-keys/agent/public.key:/run/keys/agent/public.key:ro
+      - ./dev-certs/ca.crt:/run/certs/ca.crt:ro
+      - ./dev-certs/aaph-server.crt:/run/certs/aaph-server.crt:ro
+      - ./dev-certs/aaph-server.key:/run/certs/aaph-server.key:ro
+      - ./config/agent-manifest.json:/run/config/agent-manifest.json:ro
+      - ./config/mandate.json:/run/config/mandate.json:ro
+      - ./config/policy.json:/run/config/policy.json:ro
+    networks: [control]
+    healthcheck:
+      test: [CMD, aaph-server, healthcheck, https://localhost:3000/health, /run/certs/ca.crt]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  agent:
+    <<: *hardening
+    build: {context: ., dockerfile: Dockerfile.agent}
+    command: [run, --task, /run/task/task.json, --planner, deterministic]
+    environment:
+      AAPH_AGENT_CONFIG: /run/config/agent-docker.json
+      AAPH_AGENT_SIGNING_KEY: /run/keys/agent/signing.key
+      AAPH_TLS_CA_CERT: /run/certs/ca.crt
+    volumes:
+      - ./config/agent-docker.json:/run/config/agent-docker.json:ro
+      - ./local-keys/agent/signing.key:/run/keys/agent/signing.key:ro
+      - ./dev-certs/ca.crt:/run/certs/ca.crt:ro
+      - ./demo/legitimate-task.json:/run/task/task.json:ro
+    networks: [control]
+    depends_on: {server: {condition: service_healthy}}
+volumes:
+  authority-db:
+  pep-db:
+networks:
+  control: {internal: true}

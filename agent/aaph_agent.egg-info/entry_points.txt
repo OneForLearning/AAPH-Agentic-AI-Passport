@@ -1,0 +1,2 @@
+[console_scripts]
+aaph-agent = aaph_agent.main:main

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "policy_version": "demo-policy-v1",
+  "audience_pep_id": "demo-pep",
+  "enabled_actions": ["LIST_DIRECTORY", "READ_FILE", "COMPUTE_SHA256", "WRITE_REPORT"],
+  "purposes": ["analysis"],
+  "max_read_bytes": 1048576,
+  "max_write_bytes": 262144,
+  "session_lifetime_seconds": 300,
+  "permit_lifetime_seconds": 30,
+  "max_body_bytes": 65536,
+  "budget": { "action_count": 100, "read_bytes": 10485760, "write_bytes": 1048576 }
+}

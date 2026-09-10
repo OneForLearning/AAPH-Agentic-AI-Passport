@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "demo-legitimate-task",
+  "input": "inbox/report.txt",
+  "output": "output/summary.txt",
+  "purpose": "analysis",
+  "read_limit": 1048576,
+  "write_limit": 256
+}

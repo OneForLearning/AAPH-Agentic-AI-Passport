@@ -1,0 +1,15 @@
+.git
+target
+.venv
+__pycache__
+*.pyc
+*.db
+*.sqlite*
+*.key
+*.pem
+*.crt
+local-keys
+dev-certs
+demo-data
+.env
+tools

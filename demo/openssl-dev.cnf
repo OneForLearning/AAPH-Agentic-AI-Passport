@@ -1,0 +1,22 @@
+[req]
+distinguished_name = dn
+prompt = no
+[dn]
+CN = AAPH NON_PRODUCTION_DEMO Development CA
+[v3_ca]
+basicConstraints = critical,CA:TRUE,pathlen:0
+keyUsage = critical,keyCertSign,cRLSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+[aaph_server]
+basicConstraints = critical,CA:FALSE
+keyUsage = critical,digitalSignature,keyEncipherment
+extendedKeyUsage = serverAuth
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+subjectAltName = @server_names
+[server_names]
+DNS.1 = aaph-server
+DNS.2 = server
+DNS.3 = localhost
+IP.1 = 127.0.0.1

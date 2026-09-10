@@ -1,0 +1,16 @@
+/target/
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.pem
+*.key
+*.crt
+*.db
+*.sqlite*
+/local-keys/
+/dev-certs/
+/demo-data/
+/agent/build/
+/dist/
+/.aaph-package-*/

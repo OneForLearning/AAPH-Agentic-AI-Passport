@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "instance_id": "demo-instance",
+  "server_url": "https://server:3000"
+}

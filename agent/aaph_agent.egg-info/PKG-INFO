@@ -1,0 +1,8 @@
+Metadata-Version: 2.2
+Name: aaph-agent
+Version: 0.1.0
+Summary: NON_PRODUCTION_DEMO local AAPH agent
+Requires-Python: >=3.12
+Requires-Dist: cryptography==44.0.3
+Requires-Dist: httpx==0.28.1
+Requires-Dist: jcs==0.2.1

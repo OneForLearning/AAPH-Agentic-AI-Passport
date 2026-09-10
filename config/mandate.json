@@ -1,0 +1,10 @@
+{
+  "mandate_id": "demo-mandate",
+  "agent_id": "demo-agent",
+  "budget_id": "demo-budget",
+  "allowed_actions": ["LIST_DIRECTORY", "READ_FILE", "COMPUTE_SHA256", "WRITE_REPORT"],
+  "resource_prefixes": ["inbox/", "output/"],
+  "purposes": ["analysis"],
+  "not_before": 1704067200,
+  "expires_at": 1893456000
+}
